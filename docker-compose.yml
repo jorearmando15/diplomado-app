@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  helpme-iudigital:
+    build:
+      context: .
+    ports:
+      - "8084:8084"
+    environment:
+      DATABASE_URL: jdbc:mysql://basedatos:3306/helpme_iud?createDatabaseIfNotExist=true
+      DATABASE_USERNAME: iudigital
+      DATABASE_PASSWORD: cambio123@
+    networks:
+      - iudigital
+    depends_on:
+      - basedatos
+    restart: always
+
+  basedatos:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: cambio123@
+      MYSQL_DATABASE: helpme_iud
+      MYSQL_USER: iudigital
+      MYSQL_PASSWORD: cambio123@
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - iudigital
+
+networks:
+  iudigital:
+
+volumes:
+  db_data:
+
+

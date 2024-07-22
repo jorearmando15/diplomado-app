@@ -1,0 +1,51 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /api/v1
+  #files
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+spring:
+  application:
+    name: helpmeiud
+  # conexión a base de datos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/helpme_iud?createDatabaseIfNotExist=true
+    username: root
+    password: 123456789
+  # generar tablas con codigo java
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+
+  # Envio de Email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jorge.rodriguezao@iudigital.edu.co
+    password: IUD1004378193766CRO
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+#spring security
+security:
+  jwt:
+    client-service: HelpmeIUD
+    password-service: 123456
+    scope-read: read
+    scope-write: write
+    grant-password: password
+    grant-refresh: refresh_token
+    token-validity-seconds: 3600
+    refresh-validity-seconds: 3600
+
+
